@@ -6,77 +6,81 @@
 
     <!--Content-->
     <LinearLayout
-        android:background="@drawable/login_masterung"
-        android:layout_margin="@dimen/margin1"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin1"
+        android:background="@drawable/login_masterung"
+        android:orientation="vertical">
 
         <!--email-->
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <!--Icon-->
             <ImageView
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_action_email"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_action_email" />
 
             <!--Email-->
             <EditText
-                android:inputType="textEmailAddress"
-                android:hint="e-mail"
+                android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="e-mail"
+                android:inputType="textEmailAddress" />
 
         </LinearLayout>
 
         <!--Password-->
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <!--Icon-->
             <ImageView
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_action_password"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_action_password" />
 
-            <!--Email-->
+            <!--Password-->
             <EditText
-                android:inputType="textPassword"
-                android:hint="password"
+                android:id="@+id/edtPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="password"
+                android:inputType="textPassword" />
 
         </LinearLayout>
 
         <!--Login Button-->
 
         <Button
-
-            android:text="Login"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Login" />
 
         <!--Bew Register Text-->
 
         <TextView
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorAccent"
-            android:textStyle="italic"
-            android:textSize="@dimen/h2"
-            android:layout_gravity="center_horizontal"
-            android:text="New Register"
+            android:id="@+id/txtNewRegister"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:text="New Register"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/h2"
+            android:textStyle="italic" />
 
 
     </LinearLayout>
