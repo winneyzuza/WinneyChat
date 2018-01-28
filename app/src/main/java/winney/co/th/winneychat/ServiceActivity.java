@@ -52,6 +52,8 @@ public class ServiceActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(displayNameString);
 
         drawerLayout = findViewById(R.id.myDrawerLayout);
+
+        //ต้องกำหนดให้ drawer เสมอ
         actionBarDrawerToggle = new ActionBarDrawerToggle(ServiceActivity.this,
                 drawerLayout, R.string.open, R.string.close);
 
