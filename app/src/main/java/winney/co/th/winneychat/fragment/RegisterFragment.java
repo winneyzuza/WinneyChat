@@ -16,14 +16,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import winney.co.th.winneychat.MainActivity;
 import winney.co.th.winneychat.R;
 import winney.co.th.winneychat.util.AlertUtil;
+import winney.co.th.winneychat.util.RegisterModel;
 
 /**
  * Created by Dell on 1/27/2018.
@@ -89,7 +94,7 @@ public class RegisterFragment extends Fragment {
 
         EditText passwordEditText = getView().findViewById(R.id.edtPassword);
 
-        String nameString = nameEditText.getText().toString().trim();
+        final String nameString = nameEditText.getText().toString().trim();
         String emilString = emailEditText.getText().toString().trim();
         String passwordString = passwordEditText.getText().toString().trim();
 
@@ -113,7 +118,33 @@ public class RegisterFragment extends Fragment {
                                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                                 String userUIDString = firebaseUser.getUid();
 
-                                //Log.d("28JanV1", "userUIDString === > " + userUIDString);
+                                Log.d("28JanV1", "userUIDString === > " + userUIDString);
+
+//                                Setup Model
+                                final RegisterModel registerModel = new RegisterModel(userUIDString, nameString);
+
+
+//                                Setup Display
+                                UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest
+                                        .Builder().setDisplayName(nameString).build();
+
+                                firebaseUser.updateProfile(userProfileChangeRequest)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // Lib com.google.firebase:firebase-database:11.8.0
+                                            DatabaseReference databaseReference = FirebaseDatabase
+                                                    .getInstance()
+                                                    .getReference()
+                                                    .child("DetailUser");
+                                            databaseReference.child(nameString).setValue(registerModel);
+
+
+
+                                        }   //onSuccess
+                                    });
+
+
 
 //                                Back to MainFragment
                                 getActivity().getSupportFragmentManager().popBackStack();

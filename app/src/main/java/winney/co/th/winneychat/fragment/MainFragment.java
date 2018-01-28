@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import winney.co.th.winneychat.R;
+import winney.co.th.winneychat.util.AlertUtil;
 
 /**
  * Created by Dell on 1/27/2018.
@@ -23,7 +26,37 @@ public class MainFragment extends Fragment {
 //        Register Controller
         registerController();
 
+//         Login Controller  // ctrl + Alt +M
+        loginController();
+
+
     }// Main Method
+
+    private void loginController() {
+        Button button = getView().findViewById(R.id.btnLogin);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Initial View
+                EditText email = getView().findViewById(R.id.edtEmail);
+                EditText password = getView().findViewById(R.id.edtPassword);
+
+//                Get Value From EditText
+                String emailString = email.getText().toString().trim();
+                String passwordSTring = password.getText().toString().trim();
+
+//                Check Space
+                if (emailString.isEmpty() || passwordSTring.isEmpty()) {
+                    AlertUtil alertUtil = new AlertUtil(getActivity());
+                    alertUtil.normalDialog("Have Space", "Please Filled Email and Password");
+                } else {
+//                    No Space
+                }
+
+
+            }    // onClick
+        });
+    }
 
     private void registerController() {
         TextView textView = getView().findViewById(R.id.txtNewRegister);
