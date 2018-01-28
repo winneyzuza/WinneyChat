@@ -1,5 +1,6 @@
 package winney.co.th.winneychat.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -87,6 +88,11 @@ public class RegisterFragment extends Fragment {
     }
 
     private void uploadValueToFireBase() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Please wait Few a minutes...");
+        progressDialog.setMessage("Try to save your value to Firebase");
+        progressDialog.show();
+
 //        Initial View
         EditText nameEditText = getView().findViewById(R.id.edtName);
 
@@ -114,7 +120,7 @@ public class RegisterFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 Toast.makeText(getActivity(), "Regeter Success",
                                         Toast.LENGTH_SHORT).show();
-
+                                progressDialog.dismiss();
                                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                                 String userUIDString = firebaseUser.getUid();
 

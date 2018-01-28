@@ -1,6 +1,9 @@
 package winney.co.th.winneychat.fragment;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,8 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import winney.co.th.winneychat.R;
+import winney.co.th.winneychat.ServiceActivity;
 import winney.co.th.winneychat.util.AlertUtil;
 
 /**
@@ -37,21 +47,52 @@ public class MainFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle("Please wait few minutes...");
+                progressDialog.setMessage("Continue Connected FireBase");
+                progressDialog.show();
+
 //                Initial View
                 EditText email = getView().findViewById(R.id.edtEmail);
                 EditText password = getView().findViewById(R.id.edtPassword);
 
 //                Get Value From EditText
                 String emailString = email.getText().toString().trim();
-                String passwordSTring = password.getText().toString().trim();
+                String passwordString = password.getText().toString().trim();
 
 //                Check Space
-                if (emailString.isEmpty() || passwordSTring.isEmpty()) {
+                if (emailString.isEmpty() || passwordString.isEmpty()) {
                     AlertUtil alertUtil = new AlertUtil(getActivity());
                     alertUtil.normalDialog("Have Space", "Please Filled Email and Password");
                 } else {
 //                    No Space
-                }
+                    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                    firebaseAuth.signInWithEmailAndPassword(emailString, passwordString)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if (task.isSuccessful()) {
+
+                                    Toast.makeText(getActivity(),"Welcome", Toast.LENGTH_SHORT).show();
+
+                                    progressDialog.dismiss();
+                                    Intent intent = new Intent(getActivity(),
+                                            ServiceActivity.class); //ย้าย Activity
+                                    startActivity(intent);
+                                    getActivity().finish();// ทำลายหน้าหลัก
+
+                                } else {
+                                    progressDialog.dismiss();
+                                    AlertUtil alertUtil = new AlertUtil(getActivity());
+                                    alertUtil.normalDialog("Cannot Login",
+                                            task.getException().getMessage());
+                                }
+                            }   // onComplete
+                        });
+
+                }// End if
 
 
             }    // onClick
