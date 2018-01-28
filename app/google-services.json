@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "56780881412",
+    "firebase_url": "https://winchat-66558.firebaseio.com",
+    "project_id": "winchat-66558",
+    "storage_bucket": "winchat-66558.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56780881412:android:5524a1cf74d594d2",
+        "android_client_info": {
+          "package_name": "winney.co.th.winneychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56780881412-7ifh2tcpjgus2ium97kel4gs6aibmgq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "winney.co.th.winneychat",
+            "certificate_hash": "d9fa0f0de0e36c28ff890b7df3dbcfb753dceac7"
+          }
+        },
+        {
+          "client_id": "56780881412-0pjd5dhqgnipf46m2hjvggb5pf8siuro.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsjgBkwFC3BiheetjEE4VCYy0c_7tWXBM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56780881412-0pjd5dhqgnipf46m2hjvggb5pf8siuro.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
